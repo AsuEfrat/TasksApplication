@@ -1,0 +1,31 @@
+<p style="text-align: center;font-size:45px;color:saddlebrown">ניהול משימות</p>
+<form (submit)="AddTask()" style="text-align: center;" dir="rtl" >
+   <input style="text-align: right;margin-right: 10px; margin-left: 20px;width: 15%;"  minlength="3"  type="text" name="task"  placeholder="כתוב משימה" [(ngModel)]="task.task">
+    <label>בשעה</label><input type="time" style="text-align: right;margin-right: 10px; margin-left: 20px;width: 10%;" name="TaskTime" [(ngModel)]="task.TaskTime">
+   <div *ngIf="task.errors" class="error">
+       <div [hidden]="!task.errors.minlength">משימה חייבת להכיל לפחות 3 אותיות</div>
+     </div>
+   <button style="margin-left:10px;background-color: saddlebrown;width:55px;height: 20px;" class="btn btn-primary" type="submit"> הוספה</button>
+</form>
+<hr/>
+<div>
+ 
+ 
+ <p style="text-align: right;margin-right: 25px; font-size:30px;color: black;">רשימת המשימות</p>
+ <button (click)="exportAsXLSX()" style="background-color: saddlebrown;width:80px;margin-right: 10px;"> Download Excel</button>
+     <table dir="rtl" width="100%"  >
+      <thead>
+      <tr dir="rtl" >
+        <th style="font-size: larger;color: saddlebrown;font-family: 'Courier New', Courier, monospace;" dir="rtl">משימה</th>
+        <th  style="font-size: larger;color: saddlebrown;font-family: 'Courier New', Courier, monospace;" dir="rtl" >שעת ביצוע</th>
+        <th style="font-size: larger;color: saddlebrown;font-family: 'Courier New', Courier, monospace;" dir="rtl" >מספר סידורי</th>
+      </tr>
+    </thead>
+    <tbody>
+       <tr   class="border" dir="rtl" *ngFor="let item of tasksList;let i=index"><td   style="font-size: 24px;text-align: right;" (click)="delete(item)" >{{item.task}}</td> <td style="font-size: 24px;text-align: center;" >{{item.TaskTime}}</td><th style="font-size: 24px;" class="number" (click)="delete(item)" >{{i+1}}</th></tr> 
+      </tbody>
+     </table>
+</div>
+
+  
+  
